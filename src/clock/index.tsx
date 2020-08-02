@@ -7,9 +7,11 @@ import Moment from "moment";
 export const Clock = () => {
   const [date, setDate] = React.useState(Moment());
 
-  setInterval(() => {
-    setDate(Moment());
-  }, 100);
+  React.useEffect(() => {
+    setInterval(() => {
+      setDate(Moment());
+    }, 1000);
+  }, []);
 
   return (
     <Jumbotron fluid className="m-4">
