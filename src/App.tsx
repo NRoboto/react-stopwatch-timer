@@ -4,12 +4,14 @@ import "./App.css";
 
 import { Navigation } from "./navigation";
 import { Clock } from "./clock";
+import { Stopwatch } from "./stopwatch";
 
 function App() {
   return (
     <div>
       <Navigation />
       <Clock />
+      <Stopwatch />
     </div>
   );
 }
