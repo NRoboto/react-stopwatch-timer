@@ -1,7 +1,8 @@
 import React from "react";
 import { TimeDateProps, TimeDateRowProps } from "./types";
 import { Container, Col, Row } from "reactstrap";
-import Moment from "moment";
+import moment from "moment";
+import { NumToFixedLengthString } from "../";
 
 const ToFixedWidthElements = (input: string, width: string) => {
   return input
@@ -26,28 +27,49 @@ const TimeDateRow = ({
   </Row>
 );
 
+const durationDisplayUnits = ["h", "m", "s"] as const;
+const GetDurationString = (duration: moment.Duration) => {
+  let durationString: string = "";
+  durationString += duration.days() < 1 ? "" : `${duration.days()} days `;
+
+  durationString += durationDisplayUnits
+    .filter((unit) => duration.as(unit) >= 1)
+    .map((unit, i) => {
+      const val = Math.floor(duration.get(unit));
+      const valStr = i === 0 ? val : NumToFixedLengthString(val, 2, true);
+      return valStr + ":";
+    })
+    .join("");
+
+  durationString += NumToFixedLengthString(duration.milliseconds(), 3);
+  return durationString;
+};
+
 export const TimeDate = ({
-  date = Moment(),
+  time = moment(),
   timeFormat = "hh:mm:ss",
   dateFormat,
   timeSize = 1,
   dateSize = 4,
+  colxs = "12",
 }: TimeDateProps) => {
-  return (
-    <Container>
-      <Col>
-        <TimeDateRow displaySize={timeSize} fixedWidth>
-          {date.format(timeFormat)}
-        </TimeDateRow>
+  const timeOutput = moment.isMoment(time)
+    ? time.format(timeFormat)
+    : GetDurationString(time);
 
-        {dateFormat ? (
-          <TimeDateRow displaySize={dateSize} muted>
-            {date.format(dateFormat)}
-          </TimeDateRow>
-        ) : (
-          ""
-        )}
-      </Col>
-    </Container>
+  return (
+    <Col xs={colxs}>
+      <TimeDateRow displaySize={timeSize} fixedWidth>
+        {timeOutput}
+      </TimeDateRow>
+
+      {moment.isMoment(time) && dateFormat ? (
+        <TimeDateRow displaySize={dateSize} muted>
+          {time.format(dateFormat)}
+        </TimeDateRow>
+      ) : (
+        ""
+      )}
+    </Col>
   );
 };

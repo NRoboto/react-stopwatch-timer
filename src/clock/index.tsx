@@ -17,7 +17,7 @@ export const Clock = () => {
     <Jumbotron fluid className="m-4">
       <Container fluid>
         <TimeDate
-          date={date}
+          time={date}
           timeFormat="hh:mm:ss a"
           dateFormat="dddd Do MMM YYYY"
         />

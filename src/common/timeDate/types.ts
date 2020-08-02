@@ -1,3 +1,5 @@
+import { ColumnProps } from "reactstrap/lib/Col";
+
 type DisplaySize = 1 | 2 | 3 | 4 | 5 | 6;
 
 export type TimeDateRowProps = {
@@ -8,10 +10,10 @@ export type TimeDateRowProps = {
 };
 
 export type TimeDateProps = {
-  date?: moment.Moment;
+  time?: moment.Moment | moment.Duration;
   timeFormat?: string;
   dateFormat?: string;
-  twelveHour?: boolean;
   timeSize?: DisplaySize;
   dateSize?: DisplaySize;
+  colxs?: ColumnProps;
 };
