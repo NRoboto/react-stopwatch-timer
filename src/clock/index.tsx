@@ -19,7 +19,7 @@ export const Clock = () => {
         <TimeDate
           time={date}
           timeFormat="hh:mm:ss a"
-          dateFormat="dddd Do MMM YYYY"
+          dateFormat="dddd D MMM YYYY"
         />
       </Container>
     </Jumbotron>
