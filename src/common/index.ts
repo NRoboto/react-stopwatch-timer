@@ -1,3 +1,3 @@
 export { TimeDate } from "./timeDate";
-export { useStatePrev } from "./customHooks";
+export { useStatePrev, useUniqueInterval } from "./customHooks";
 export { NumToFixedLengthString } from "./utils";

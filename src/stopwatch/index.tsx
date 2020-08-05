@@ -1,5 +1,6 @@
 import React from "react";
 import { TimeDate, useStatePrev } from "../common";
+import { TimeDate, useStatePrev, useUniqueInterval } from "../common";
 import { Jumbotron, Button, Col } from "reactstrap";
 import { StopwatchElement } from "./stopwatchElement";
 import { TimerElementDatum } from "./types";
@@ -10,9 +11,7 @@ export const Stopwatch = () => {
   const [currDuration, setCurrDuration] = React.useState(dayjs.duration(0));
   const [startTime, setStartTime] = React.useState(dayjs());
   const [currStartTime, setCurrStartTime] = React.useState(dayjs());
-  const [intervalID, prevIntervalID, setIntervalID] = useStatePrev<
-    undefined | number
-  >(undefined);
+  const setInterval = useUniqueInterval();
 
   const [timerData, setTimerData] = React.useState<
     readonly TimerElementDatum[]
@@ -20,6 +19,9 @@ export const Stopwatch = () => {
 
   const onStart = () => {
     setStartTime(dayjs());
+    setInterval(() => {
+      setT(dayjs());
+    }, 20);
   };
 
   const onLap = () => {
@@ -37,7 +39,6 @@ export const Stopwatch = () => {
   }, [startTime, currStartTime]);
 
   React.useEffect(() => {
-    window.clearInterval(prevIntervalID);
   }, [intervalID]);
 
   return (
