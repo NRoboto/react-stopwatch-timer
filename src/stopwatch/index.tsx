@@ -14,6 +14,11 @@ export const Stopwatch = () => {
     readonly TimerElementDatum[]
   >([]);
 
+  const resetDurations = () => {
+    setTotalDuration(dayjs.duration(0));
+    setCurrDuration(dayjs.duration(0));
+  };
+
   const onStart = () => {
     t0Ref.current = dayjs();
     setT1(t0);
@@ -27,6 +32,10 @@ export const Stopwatch = () => {
     setCurrDuration(dayjs.duration(0)); // Sometimes doesn't reset?
   };
 
+  const onReset = () => {
+    resetDurations();
+    setTimerData([]);
+  };
 
   React.useEffect(() => {
     const dt = dayjs.duration(t1?.diff(t0 ?? t1));
@@ -47,7 +56,7 @@ export const Stopwatch = () => {
         <Button color="warning" onClick={onStart} className="mx-1 mb-2">
           Pause
         </Button>
-        <Button color="danger" onClick={onStart} className="mx-1 mb-2">
+        <Button color="danger" onClick={onReset} className="mx-1 mb-2">
           Reset
         </Button>
         <Button color="info" onClick={onLap} className="mx-1 mb-2">
