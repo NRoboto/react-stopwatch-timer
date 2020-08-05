@@ -1,7 +1,7 @@
 import React from "react";
 import { TimeDateProps, TimeDateRowProps } from "./types";
 import { Container, Col, Row } from "reactstrap";
-import moment from "moment";
+import dayjs, { Duration } from "../dayjs";
 import { NumToFixedLengthString } from "../";
 
 const ToFixedWidthElements = (input: string, width: string) => {
@@ -28,7 +28,7 @@ const TimeDateRow = ({
 );
 
 const durationDisplayUnits = ["h", "m", "s"] as const;
-const GetDurationString = (duration: moment.Duration) => {
+const GetDurationString = (duration: Duration) => {
   let durationString: string = "";
   durationString += duration.days() < 1 ? "" : `${duration.days()} days `;
 
@@ -46,14 +46,14 @@ const GetDurationString = (duration: moment.Duration) => {
 };
 
 export const TimeDate = ({
-  time = moment(),
+  time = dayjs(),
   timeFormat = "hh:mm:ss",
   dateFormat,
   timeSize = 1,
   dateSize = 4,
   colxs = "12",
 }: TimeDateProps) => {
-  const timeOutput = moment.isMoment(time)
+  const timeOutput = dayjs.isDayjs(time)
     ? time.format(timeFormat)
     : GetDurationString(time);
 
@@ -63,7 +63,7 @@ export const TimeDate = ({
         {timeOutput}
       </TimeDateRow>
 
-      {moment.isMoment(time) && dateFormat ? (
+      {dayjs.isDayjs(time) && dateFormat ? (
         <TimeDateRow displaySize={dateSize} muted>
           {time.format(dateFormat)}
         </TimeDateRow>

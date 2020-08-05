@@ -1,4 +1,6 @@
+import dayjs from "../common/dayjs";
+
 export type TimeDisplayProps = {
-  date: moment.Moment;
+  date: dayjs.Dayjs;
   format: string;
 };

@@ -2,14 +2,14 @@ import React from "react";
 import { TimeDate } from "../common";
 import { TimeDisplayProps } from "./types";
 import { Container, Jumbotron } from "reactstrap";
-import Moment from "moment";
+import dayjs from "../common/dayjs";
 
 export const Clock = () => {
-  const [date, setDate] = React.useState(Moment());
+  const [date, setDate] = React.useState(dayjs());
 
   React.useEffect(() => {
     setInterval(() => {
-      setDate(Moment());
+      setDate(dayjs());
     }, 1000);
   }, []);
 

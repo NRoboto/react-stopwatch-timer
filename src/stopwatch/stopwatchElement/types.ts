@@ -1,5 +1,7 @@
+import { Duration } from "../../common/dayjs";
+
 export type StopwatchElementProps = {
   lap?: number;
-  duration: moment.Duration;
-  totalDuration: moment.Duration;
+  duration: Duration;
+  totalDuration: Duration;
 };

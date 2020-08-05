@@ -1,4 +1,5 @@
 import { ColumnProps } from "reactstrap/lib/Col";
+import dayjs, { Duration } from "../dayjs";
 
 type DisplaySize = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -10,7 +11,7 @@ export type TimeDateRowProps = {
 };
 
 export type TimeDateProps = {
-  time?: moment.Moment | moment.Duration;
+  time?: dayjs.Dayjs | Duration;
   timeFormat?: string;
   dateFormat?: string;
   timeSize?: DisplaySize;

@@ -1,4 +1,6 @@
+import { Duration } from "../common/dayjs";
+
 export type TimerElementDatum = {
-  time: moment.Duration;
-  total: moment.Duration;
+  time: Duration;
+  total: Duration;
 };

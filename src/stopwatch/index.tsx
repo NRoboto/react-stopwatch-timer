@@ -1,15 +1,15 @@
 import React from "react";
 import { TimeDate, useStatePrev } from "../common";
 import { Jumbotron, Button, Col } from "reactstrap";
-import moment from "moment";
 import { StopwatchElement } from "./stopwatchElement";
 import { TimerElementDatum } from "./types";
+import dayjs from "../common/dayjs";
 
 export const Stopwatch = () => {
-  const [totalDuration, setTotalDuration] = React.useState(moment.duration(0));
-  const [currDuration, setCurrDuration] = React.useState(moment.duration(0));
-  const [startTime, setStartTime] = React.useState(moment());
-  const [currStartTime, setCurrStartTime] = React.useState(moment());
+  const [totalDuration, setTotalDuration] = React.useState(dayjs.duration(0));
+  const [currDuration, setCurrDuration] = React.useState(dayjs.duration(0));
+  const [startTime, setStartTime] = React.useState(dayjs());
+  const [currStartTime, setCurrStartTime] = React.useState(dayjs());
   const [intervalID, prevIntervalID, setIntervalID] = useStatePrev<
     undefined | number
   >(undefined);
@@ -19,19 +19,19 @@ export const Stopwatch = () => {
   >([]);
 
   const onStart = () => {
-    setStartTime(moment());
+    setStartTime(dayjs());
   };
 
   const onLap = () => {
     setTimerData([...timerData, { time: currDuration, total: totalDuration }]);
-    setCurrStartTime(moment());
+    setCurrStartTime(dayjs());
   };
 
   React.useEffect(() => {
     setIntervalID(
       window.setInterval(() => {
-        setTotalDuration(moment.duration(moment().diff(startTime)));
-        setCurrDuration(moment.duration(moment().diff(currStartTime)));
+        setTotalDuration(dayjs.duration(dayjs().diff(startTime)));
+        setCurrDuration(dayjs.duration(dayjs().diff(currStartTime)));
       }, 20)
     );
   }, [startTime, currStartTime]);
