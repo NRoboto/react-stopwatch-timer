@@ -37,6 +37,10 @@ export const Stopwatch = () => {
     setTimerData([]);
   };
 
+  const onPause = () => {
+    setInterval();
+  };
+
   React.useEffect(() => {
     const dt = dayjs.duration(t1?.diff(t0 ?? t1));
     setTotalDuration(totalDuration.add(dt));
@@ -53,7 +57,7 @@ export const Stopwatch = () => {
         <Button color="primary" onClick={onStart} className="mx-1 mb-2">
           Start
         </Button>
-        <Button color="warning" onClick={onStart} className="mx-1 mb-2">
+        <Button color="warning" onClick={onPause} className="mx-1 mb-2">
           Pause
         </Button>
         <Button color="danger" onClick={onReset} className="mx-1 mb-2">
