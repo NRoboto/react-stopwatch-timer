@@ -1,5 +1,4 @@
 import React from "react";
-import { TimeDate, useStatePrev } from "../common";
 import { TimeDate, useStatePrev, useUniqueInterval } from "../common";
 import { Jumbotron, Button, Col } from "reactstrap";
 import { StopwatchElement } from "./stopwatchElement";
@@ -7,39 +6,33 @@ import { TimerElementDatum } from "./types";
 import dayjs from "../common/dayjs";
 
 export const Stopwatch = () => {
-  const [totalDuration, setTotalDuration] = React.useState(dayjs.duration(0));
+  const [t1, t0, setT1, t0Ref] = useStatePrev(dayjs());
   const [currDuration, setCurrDuration] = React.useState(dayjs.duration(0));
-  const [startTime, setStartTime] = React.useState(dayjs());
-  const [currStartTime, setCurrStartTime] = React.useState(dayjs());
+  const [totalDuration, setTotalDuration] = React.useState(dayjs.duration(0));
   const setInterval = useUniqueInterval();
-
   const [timerData, setTimerData] = React.useState<
     readonly TimerElementDatum[]
   >([]);
 
   const onStart = () => {
-    setStartTime(dayjs());
+    t0Ref.current = dayjs();
+    setT1(t0);
     setInterval(() => {
-      setT(dayjs());
+      setT1(dayjs());
     }, 20);
   };
 
   const onLap = () => {
     setTimerData([...timerData, { time: currDuration, total: totalDuration }]);
-    setCurrStartTime(dayjs());
+    setCurrDuration(dayjs.duration(0)); // Sometimes doesn't reset?
   };
 
-  React.useEffect(() => {
-    setIntervalID(
-      window.setInterval(() => {
-        setTotalDuration(dayjs.duration(dayjs().diff(startTime)));
-        setCurrDuration(dayjs.duration(dayjs().diff(currStartTime)));
-      }, 20)
-    );
-  }, [startTime, currStartTime]);
 
   React.useEffect(() => {
-  }, [intervalID]);
+    const dt = dayjs.duration(t1?.diff(t0 ?? t1));
+    setTotalDuration(totalDuration.add(dt));
+    setCurrDuration(currDuration.add(dt));
+  }, [t0, t1]);
 
   return (
     <Jumbotron>
@@ -61,8 +54,12 @@ export const Stopwatch = () => {
           Lap
         </Button>
       </Col>
-      {timerData.map((datum) => (
-        <StopwatchElement duration={datum.time} totalDuration={datum.total} />
+      {timerData.map((datum, i) => (
+        <StopwatchElement
+          duration={datum.time}
+          totalDuration={datum.total}
+          key={i}
+        />
       ))}
     </Jumbotron>
   );

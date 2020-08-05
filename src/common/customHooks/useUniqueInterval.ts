@@ -1,7 +1,7 @@
 import React from "react";
 
 type SetInterval = (
-  handler: TimerHandler,
+  handler?: TimerHandler,
   timeout?: number | undefined
 ) => void;
 export const useUniqueInterval = (): SetInterval => {
@@ -9,6 +9,6 @@ export const useUniqueInterval = (): SetInterval => {
 
   return (handler, timeout) => {
     window.clearInterval(intervalID.current);
-    intervalID.current = window.setInterval(handler, timeout);
+    if (handler) intervalID.current = window.setInterval(handler, timeout);
   };
 };
