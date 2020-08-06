@@ -14,7 +14,7 @@ export const Clock = () => {
   }, []);
 
   return (
-    <Jumbotron fluid className="m-4">
+    <Jumbotron className="m-4">
       <Container fluid>
         <TimeDate
           time={date}

@@ -48,12 +48,12 @@ export const Stopwatch = () => {
   }, [t0, t1]);
 
   return (
-    <Jumbotron>
+    <Jumbotron className="m-4">
       <StopwatchElement
         duration={currDuration}
-        totalDuration={totalDuration}
-      ></StopwatchElement>
-      <Col>
+        totalDuration={timerData.length > 0 ? totalDuration : undefined}
+      />
+      <Col className="container-fluid d-flex justify-content-center">
         <Button color="primary" onClick={onStart} className="mx-1 mb-2">
           Start
         </Button>
@@ -71,6 +71,7 @@ export const Stopwatch = () => {
         <StopwatchElement
           duration={datum.time}
           totalDuration={datum.total}
+          lap={i + 1}
           key={i}
         />
       ))}
