@@ -5,6 +5,7 @@ import "./App.css";
 import { Navigation } from "./navigation";
 import { Clock } from "./clock";
 import { Stopwatch } from "./stopwatch";
+import { Timer } from "./timer";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Navigation />
       <Clock />
       <Stopwatch />
+      <Timer />
     </div>
   );
 }
