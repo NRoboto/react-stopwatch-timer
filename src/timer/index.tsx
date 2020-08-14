@@ -1,9 +1,7 @@
 import React from "react";
 import { Jumbotron, Button, Row, Container, Col } from "reactstrap";
-import { ClampNumber, StringToNum } from "../common";
 import dayjs, { Duration } from "../common/dayjs";
 import { TimerInput } from "./input";
-import { InputTimeChangeTypes } from "./types";
 import { Countdown } from "./countdown";
 
 export const Timer = () => {
@@ -22,13 +20,17 @@ export const Timer = () => {
     setIsStarted(false);
   };
 
+  const onResetClicked = () => {
+    setInputTime(inputTime.clone());
+  };
+
   return (
     <Jumbotron className="m-4">
       <Container>
         <TimerInput onChange={onInputChange} disabled={isStarted} />
         <Row>
-          {!isStarted ? (
-            <Col xs="12">
+          <Col xs="12" md="6">
+            {!isStarted ? (
               <Button
                 color="primary"
                 className="my-2"
@@ -37,26 +39,27 @@ export const Timer = () => {
               >
                 Start
               </Button>
-            </Col>
-          ) : (
-            <>
-              <Col xs="12" md="6">
-                <Button
-                  color="danger"
-                  className="my-2"
-                  block
-                  onClick={onStartStopClick}
-                >
-                  Stop
-                </Button>
-              </Col>
-              <Col xs="12" md="6">
-                <Button color="warning" className="my-2" block>
-                  Reset
-                </Button>
-              </Col>
-            </>
-          )}
+            ) : (
+              <Button
+                color="danger"
+                className="my-2"
+                block
+                onClick={onStartStopClick}
+              >
+                Stop
+              </Button>
+            )}
+          </Col>
+          <Col xs="12" md="6">
+            <Button
+              color="warning"
+              className="my-2"
+              block
+              onClick={onResetClicked}
+            >
+              Reset
+            </Button>
+          </Col>
         </Row>
       </Container>
       <Countdown
