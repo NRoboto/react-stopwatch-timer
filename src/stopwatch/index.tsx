@@ -1,6 +1,6 @@
 import React from "react";
 import { TimeDate, useStatePrev, useUniqueInterval } from "../common";
-import { Jumbotron, Button, Col } from "reactstrap";
+import { Jumbotron, Button, Col, Row } from "reactstrap";
 import { StopwatchElement } from "./stopwatchElement";
 import { TimerElementDatum } from "./types";
 import dayjs from "../common/dayjs";
@@ -53,20 +53,28 @@ export const Stopwatch = () => {
         duration={currDuration}
         totalDuration={timerData.length > 0 ? totalDuration : undefined}
       />
-      <Col className="container-fluid d-flex justify-content-center">
-        <Button color="primary" onClick={onStart} className="mx-1 mb-2">
-          Start
-        </Button>
-        <Button color="warning" onClick={onPause} className="mx-1 mb-2">
-          Pause
-        </Button>
-        <Button color="danger" onClick={onReset} className="mx-1 mb-2">
-          Reset
-        </Button>
-        <Button color="info" onClick={onLap} className="mx-1 mb-2">
-          Lap
-        </Button>
-      </Col>
+      <Row>
+        <Col xs="6" md="3">
+          <Button color="primary" onClick={onStart} className="mx-1 mb-2" block>
+            Start
+          </Button>
+        </Col>
+        <Col xs="6" md="3">
+          <Button color="warning" onClick={onPause} className="mx-1 mb-2" block>
+            Pause
+          </Button>
+        </Col>
+        <Col xs="6" md="3">
+          <Button color="danger" onClick={onReset} className="mx-1 mb-2" block>
+            Reset
+          </Button>
+        </Col>
+        <Col xs="6" md="3">
+          <Button color="info" onClick={onLap} className="mx-1 mb-2" block>
+            Lap
+          </Button>
+        </Col>
+      </Row>
       {timerData.map((datum, i) => (
         <StopwatchElement
           duration={datum.time}
