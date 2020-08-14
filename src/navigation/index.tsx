@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import {
   Navbar,
   NavItem,
@@ -6,13 +7,24 @@ import {
   NavbarToggler,
   Collapse,
   Nav,
-  NavLink,
   NavbarText,
   Container,
   Col,
   Row,
   Button,
 } from "reactstrap";
+
+type NavbarItemProps = {
+  to: string;
+  children: any;
+};
+const NavbarItem = ({ to, children }: NavbarItemProps) => (
+  <NavItem>
+    <NavLink to={to} className="nav-link" activeClassName="active">
+      {children}
+    </NavLink>
+  </NavItem>
+);
 
 export const Navigation = () => {
   const [navIsCollapsed, setNavCollapsed] = React.useState(true);
@@ -53,15 +65,9 @@ export const Navigation = () => {
         <Collapse isOpen={!navIsCollapsed} navbar>
           {/* Left content */}
           <Nav className="mr-auto" navbar>
-            <NavItem active>
-              <NavLink href="#">Stopwatch</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#">Timer</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#">Clock</NavLink>
-            </NavItem>
+            <NavbarItem to="/stopwatch">Stopwatch</NavbarItem>
+            <NavbarItem to="/timer">Timer</NavbarItem>
+            <NavbarItem to="/clock">Clock</NavbarItem>
           </Nav>
           {/* Right content */}
           <Nav>
