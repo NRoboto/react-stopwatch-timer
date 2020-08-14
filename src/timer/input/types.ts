@@ -1,6 +1,8 @@
 import { Duration } from "../../common/dayjs";
 import { InputTimeChangeTypes } from "../types";
 
+export * from "../types";
+
 export type TimeInputParams = {
   value: number;
   onValueChange: React.ChangeEventHandler<HTMLInputElement>;
@@ -11,9 +13,10 @@ export type TimeInputParams = {
 };
 
 export type TimerInputProps = {
-  inputTime: Duration;
-  onInputTimeChange: (
-    type: InputTimeChangeTypes
-  ) => React.ChangeEventHandler<HTMLInputElement>;
+  // inputTime: Duration;
+  // onInputTimeChange: (
+  //   type: InputTimeChangeTypes
+  // ) => React.ChangeEventHandler<HTMLInputElement>;
+  onChange: (value: Duration) => void;
   disabled: boolean;
 };
