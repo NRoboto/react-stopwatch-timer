@@ -11,13 +11,13 @@ import { Timer } from "./timer";
 
 type RouteElement = {
   path: string;
-  component: JSX.Element;
+  Component: JSX.Element;
 };
 const routes: RouteElement[] = [
-  { path: "/clock", component: <Clock /> },
-  { path: "/stopwatch", component: <Stopwatch /> },
-  { path: "/timer", component: <Timer /> },
-  { path: "/", component: <Clock /> },
+  { path: "/clock", Component: <Clock /> },
+  { path: "/stopwatch", Component: <Stopwatch /> },
+  { path: "/timer", Component: <Timer /> },
+  { path: "/", Component: <Clock /> },
 ];
 
 function App() {
@@ -30,18 +30,9 @@ function App() {
       <TransitionGroup className="content">
         <CSSTransition key={location.key} classNames="fade" timeout={300}>
           <Switch location={location}>
-            <Route path="/clock">
-              <Clock />
-            </Route>
-            <Route path="/stopwatch">
-              <Stopwatch />
-            </Route>
-            <Route path="/timer">
-              <Timer />
-            </Route>
-            <Route path="/">
-              <Clock />
-            </Route>
+            {routes.map((route) => (
+              <Route path={route.path}>{route.Component}</Route>
+            ))}
           </Switch>
         </CSSTransition>
       </TransitionGroup>
