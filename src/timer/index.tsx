@@ -18,7 +18,7 @@ import { TimerFinishedModalProps } from "./types";
 
 const TimerFinishedModal = ({ isOpen, close }: TimerFinishedModalProps) => (
   <Modal isOpen={isOpen} toggle={close}>
-    <ModalHeader toggle={close}>Timer Modal</ModalHeader>
+    <ModalHeader toggle={close}>Timer</ModalHeader>
     <ModalBody>The timer is finished!</ModalBody>
     <ModalFooter>
       <Button color="primary" onClick={close}>
@@ -37,7 +37,7 @@ export const Timer = () => {
     setInputTime(value);
   };
 
-  const onStartStopClick: React.MouseEventHandler = (event) => {
+  const onStartStopClick: React.MouseEventHandler = (_event) => {
     setIsStarted(!isStarted);
   };
 
@@ -47,6 +47,7 @@ export const Timer = () => {
     if (isFinished) {
       setShowDoneModal(true);
       // Play timer finished sound
+      new Audio("resources/alert.mp3").play();
     }
   };
 
