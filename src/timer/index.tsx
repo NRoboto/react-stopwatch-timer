@@ -3,6 +3,7 @@ import { Jumbotron, Button, Row, Container, Col } from "reactstrap";
 import dayjs, { Duration } from "../common/dayjs";
 import { TimerInput } from "./input";
 import { Countdown } from "./countdown";
+import { ContentContainer } from "../common";
 
 export const Timer = () => {
   const [inputTime, setInputTime] = React.useState(dayjs.duration(0));
@@ -25,7 +26,7 @@ export const Timer = () => {
   };
 
   return (
-    <Jumbotron className="m-4">
+    <ContentContainer>
       <Container>
         <TimerInput onChange={onInputChange} disabled={isStarted} />
         <Row>
@@ -67,6 +68,6 @@ export const Timer = () => {
         isStarted={isStarted}
         onCountdownStopped={onCountdownStopped}
       />
-    </Jumbotron>
+    </ContentContainer>
   );
 };

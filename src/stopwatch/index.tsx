@@ -1,5 +1,10 @@
 import React from "react";
-import { TimeDate, useStatePrev, useUniqueInterval } from "../common";
+import {
+  TimeDate,
+  ContentContainer,
+  useStatePrev,
+  useUniqueInterval,
+} from "../common";
 import { Jumbotron, Button, Col, Row } from "reactstrap";
 import { StopwatchElement } from "./stopwatchElement";
 import { TimerElementDatum } from "./types";
@@ -48,7 +53,7 @@ export const Stopwatch = () => {
   }, [t0, t1]);
 
   return (
-    <Jumbotron className="m-4">
+    <ContentContainer>
       <StopwatchElement
         duration={currDuration}
         totalDuration={timerData.length > 0 ? totalDuration : undefined}
@@ -83,6 +88,6 @@ export const Stopwatch = () => {
           key={i}
         />
       ))}
-    </Jumbotron>
+    </ContentContainer>
   );
 };

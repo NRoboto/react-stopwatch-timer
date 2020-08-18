@@ -19,7 +19,7 @@ body,
 }
 
 .fade-exit-active {
-  position: absolute;
+  /* position: absolute; */
   transition: 300ms ease-in-out;
   transform: translateX(-150%);
 }
