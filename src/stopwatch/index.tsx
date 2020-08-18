@@ -5,7 +5,7 @@ import {
   useStatePrev,
   useUniqueInterval,
 } from "../common";
-import { Jumbotron, Button, Col, Row } from "reactstrap";
+import { Button, Col, Row } from "reactstrap";
 import { StopwatchElement } from "./stopwatchElement";
 import { TimerElementDatum } from "./types";
 import dayjs from "../common/dayjs";

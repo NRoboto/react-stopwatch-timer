@@ -1,7 +1,5 @@
 import React from "react";
 import { TimeDate, ContentContainer } from "../common";
-import { TimeDisplayProps } from "./types";
-import { Container, Jumbotron } from "reactstrap";
 import dayjs from "../common/dayjs";
 
 export const Clock = () => {
