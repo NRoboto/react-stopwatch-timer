@@ -1,9 +1,10 @@
 import React from "react";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { RouteElement } from "./types";
+
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 import { Navigation } from "./navigation";
 import { Clock } from "./clock";
