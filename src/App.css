@@ -6,29 +6,30 @@ body,
   overflow-x: hidden;
 }
 
-#root {
-  display: flex;
-  flex-direction: column;
+.main-content {
+  position: relative;
 }
 
-#root > .content {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  justify-content: start;
-}
-
-.fade-exit-active {
-  /* position: absolute; */
+/* Begin Transition Animations */
+.slide-exit-active {
   transition: 300ms ease-in-out;
-  transform: translateX(-150%);
+  transform: translateX(-110%);
 }
 
-.fade-enter {
-  transform: translateX(150%);
+.slide-enter {
+  transform: translateX(110%);
 }
 
-.fade-enter-active {
+.slide-enter-active {
   transition: 300ms ease-in-out;
-  transform: translateX(0);
+  transform: translateX(0) !important;
 }
+
+.slide-right .slide-enter {
+  transform: translateX(-110%);
+}
+
+.slide-right .slide-exit-active {
+  transform: translateX(110%);
+}
+/* End Transition Animations */
