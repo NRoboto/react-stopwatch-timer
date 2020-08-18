@@ -1,0 +1,3 @@
+.countdown-progress .progress-bar {
+  transition: width 0.2s ease;
+}

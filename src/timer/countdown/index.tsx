@@ -1,7 +1,10 @@
 import React from "react";
 import { TimeDate, useStatePrev, useUniqueInterval } from "../../common";
 import dayjs from "../../common/dayjs";
+import { Progress } from "reactstrap";
 import { CountdownProps } from "./types";
+
+import "./styles.css";
 
 export const Countdown = ({
   inputTime,
@@ -42,5 +45,14 @@ export const Countdown = ({
     }
   }, [countdownTime, isStarted]);
 
-  return <TimeDate time={countdownTime} />;
+  return (
+    <>
+      <TimeDate time={countdownTime} />
+      <Progress
+        value={countdownTime.asMilliseconds()}
+        max={inputTime.asMilliseconds()}
+        className="countdown-progress w-100"
+      />
+    </>
+  );
 };
