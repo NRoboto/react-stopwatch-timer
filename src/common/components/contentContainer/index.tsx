@@ -5,7 +5,7 @@ import { ContentContainerProps } from "./types";
 import "./styles.css";
 
 export const ContentContainer = ({ children }: ContentContainerProps) => (
-  <Jumbotron className="m-4 position-absolute content-container">
+  <Jumbotron className="m-4 position-absolute content-container bg-light shadow">
     <Container fluid>{children}</Container>
   </Jumbotron>
 );

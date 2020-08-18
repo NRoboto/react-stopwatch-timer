@@ -59,7 +59,13 @@ export const Navigation = () => {
       </Collapse>
 
       {/* Navbar */}
-      <Navbar color="primary" dark expand="md" sticky="top">
+      <Navbar
+        color="primary"
+        dark
+        expand="md"
+        sticky="top"
+        className="shadow-sm"
+      >
         <NavbarBrand href="#">Stopwatch/Timer App</NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2"></NavbarToggler>
         <Collapse isOpen={!navIsCollapsed} navbar>
