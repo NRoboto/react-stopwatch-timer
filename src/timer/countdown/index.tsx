@@ -38,7 +38,7 @@ export const Countdown = ({
     if (isStarted && countdownTime.asMilliseconds() <= 0) {
       setCountdownTime(dayjs.duration(0));
       setInterval();
-      onCountdownStopped();
+      onCountdownStopped(true);
     }
   }, [countdownTime, isStarted]);
 

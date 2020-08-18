@@ -1,1 +1,4 @@
-export type InputTimeChangeTypes = "h" | "m" | "s";
+export type TimerFinishedModalProps = {
+  isOpen: boolean;
+  close: () => void;
+};

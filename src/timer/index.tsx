@@ -1,13 +1,37 @@
 import React from "react";
-import { Jumbotron, Button, Row, Container, Col } from "reactstrap";
+import {
+  Jumbotron,
+  Button,
+  Row,
+  Container,
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
 import dayjs, { Duration } from "../common/dayjs";
 import { TimerInput } from "./input";
 import { Countdown } from "./countdown";
 import { ContentContainer } from "../common";
+import { TimerFinishedModalProps } from "./types";
+
+const TimerFinishedModal = ({ isOpen, close }: TimerFinishedModalProps) => (
+  <Modal isOpen={isOpen} toggle={close}>
+    <ModalHeader toggle={close}>Timer Modal</ModalHeader>
+    <ModalBody>The timer is finished!</ModalBody>
+    <ModalFooter>
+      <Button color="primary" onClick={close}>
+        Close
+      </Button>
+    </ModalFooter>
+  </Modal>
+);
 
 export const Timer = () => {
   const [inputTime, setInputTime] = React.useState(dayjs.duration(0));
   const [isStarted, setIsStarted] = React.useState(false);
+  const [showDoneModal, setShowDoneModal] = React.useState(false);
 
   const onInputChange = (value: Duration) => {
     setInputTime(value);
@@ -17,8 +41,13 @@ export const Timer = () => {
     setIsStarted(!isStarted);
   };
 
-  const onCountdownStopped = () => {
+  const onCountdownStopped = (isFinished: boolean) => {
     setIsStarted(false);
+
+    if (isFinished) {
+      setShowDoneModal(true);
+      // Play timer finished sound
+    }
   };
 
   const onResetClicked = () => {
@@ -67,6 +96,10 @@ export const Timer = () => {
         inputTime={inputTime}
         isStarted={isStarted}
         onCountdownStopped={onCountdownStopped}
+      />
+      <TimerFinishedModal
+        isOpen={showDoneModal}
+        close={() => setShowDoneModal(false)}
       />
     </ContentContainer>
   );

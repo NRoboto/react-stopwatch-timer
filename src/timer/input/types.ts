@@ -1,7 +1,6 @@
 import { Duration } from "../../common/dayjs";
-import { InputTimeChangeTypes } from "../types";
 
-export * from "../types";
+export type InputTimeChangeTypes = "h" | "m" | "s";
 
 export type TimeInputParams = {
   value: number;

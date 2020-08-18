@@ -3,5 +3,5 @@ import { Duration } from "../../common/dayjs";
 export type CountdownProps = {
   inputTime: Duration;
   isStarted: boolean;
-  onCountdownStopped: () => void;
+  onCountdownStopped: (isFinished: boolean) => void;
 };
