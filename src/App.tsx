@@ -3,32 +3,31 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { RouteElement } from "./types";
 
 import { Navigation } from "./navigation";
 import { Clock } from "./clock";
 import { Stopwatch } from "./stopwatch";
 import { Timer } from "./timer";
 
-type RouteElement = {
-  path: string;
-  Component: JSX.Element;
-};
 const routes: readonly RouteElement[] = [
   { path: "/stopwatch", Component: <Stopwatch /> },
   { path: "/timer", Component: <Timer /> },
   { path: "/clock", Component: <Clock /> },
 ];
 
+const routeIndex = (path: string) =>
+  routes.findIndex((route) => route.path === path);
+const getSlideDirection = (path: string, prevPath: string) =>
+  routeIndex(path) >= routeIndex(prevPath) ? "left" : "right";
+
 function App() {
   let location = useLocation();
   let prevLocation = React.useRef(location);
-
-  const routeIndex = (path: string) =>
-    routes.findIndex((route) => route.path === path);
-  const slideDirection =
-    routeIndex(location.pathname) >= routeIndex(prevLocation.current.pathname)
-      ? "left"
-      : "right";
+  const slideDirection = getSlideDirection(
+    location.pathname,
+    prevLocation.current.pathname
+  );
 
   React.useEffect(() => {
     prevLocation.current = location;
