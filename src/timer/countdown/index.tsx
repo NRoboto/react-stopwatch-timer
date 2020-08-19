@@ -52,6 +52,7 @@ export const Countdown = ({
         value={countdownTime.asMilliseconds()}
         max={inputTime.asMilliseconds()}
         className="countdown-progress w-100"
+        animated
       />
     </>
   );
