@@ -5,22 +5,27 @@ import dayjs, { Duration } from "../dayjs";
 import { NumToFixedLengthString } from "../";
 
 const ToFixedWidthElements = (input: string, width: string) => {
-  return input
-    .split("")
-    .map((char) => (
-      <span style={{ width, display: "inline-block", textAlign: "center" }}>
-        {char}
-      </span>
-    ));
+  return input.split("").map((char, i) => (
+    <span
+      style={{ width, display: "inline-block", textAlign: "center" }}
+      className="fixed-width-element"
+      key={i}
+    >
+      {char}
+    </span>
+  ));
 };
 
 const TimeDateRow = ({
   displaySize,
+  className,
   muted,
   fixedWidth,
   children,
 }: TimeDateRowProps) => (
-  <Row className="d-flex justify-content-center align-content-center">
+  <Row
+    className={`d-flex justify-content-center align-content-center ${className}`}
+  >
     <p className={`display-${displaySize} ${muted ? "text-muted" : ""}`}>
       {fixedWidth ? ToFixedWidthElements(children, "0.5em") : children}
     </p>
@@ -59,12 +64,12 @@ export const TimeDate = ({
 
   return (
     <Col xs={colxs}>
-      <TimeDateRow displaySize={timeSize} fixedWidth>
+      <TimeDateRow className="time-output" displaySize={timeSize} fixedWidth>
         {timeOutput}
       </TimeDateRow>
 
       {dayjs.isDayjs(time) && dateFormat ? (
-        <TimeDateRow displaySize={dateSize} muted>
+        <TimeDateRow className="date-output" displaySize={dateSize} muted>
           {time.format(dateFormat)}
         </TimeDateRow>
       ) : (

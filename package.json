@@ -44,8 +44,11 @@
     ]
   },
   "devDependencies": {
+    "@types/react-test-renderer": "^16.9.3",
     "@types/reactstrap": "^8.5.0",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
-    "@typescript-eslint/parser": "^3.9.0"
+    "@typescript-eslint/parser": "^3.9.0",
+    "mockdate": "^3.0.2",
+    "react-test-renderer": "^16.13.1"
   }
 }
