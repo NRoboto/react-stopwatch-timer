@@ -10,6 +10,10 @@ body,
   position: relative;
 }
 
+.bg-darkish {
+  background-color: #464e57 !important;
+}
+
 /* Begin Transition Animations */
 .slide-exit-active {
   transition: 300ms ease-in-out;
@@ -33,3 +37,13 @@ body,
   transform: translateX(110%);
 }
 /* End Transition Animations */
+
+/* Begin Theme Switch Transitions */
+.bg-dark,
+.bg-darkish,
+.bg-white,
+.bg-light,
+.bg-secondary {
+  transition: all 0.3s ease-in-out;
+}
+/* End Theme Switch Transitions */

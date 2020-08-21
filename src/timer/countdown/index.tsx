@@ -1,5 +1,10 @@
 import React from "react";
-import { TimeDate, useStatePrev, useUniqueInterval } from "../../common";
+import {
+  TimeDate,
+  ThemeContext,
+  useStatePrev,
+  useUniqueInterval,
+} from "../../common";
 import dayjs from "../../common/dayjs";
 import { Progress } from "reactstrap";
 import { CountdownProps } from "./types";
@@ -14,6 +19,7 @@ export const Countdown = ({
   const [t1, t0, setT1, t0Ref] = useStatePrev(dayjs());
   const [countdownTime, setCountdownTime] = React.useState(dayjs.duration(0));
   const setInterval = useUniqueInterval();
+  const theme = React.useContext(ThemeContext);
 
   React.useEffect(() => {
     if (isStarted) {
@@ -51,7 +57,8 @@ export const Countdown = ({
       <Progress
         value={countdownTime.asMilliseconds()}
         max={inputTime.asMilliseconds()}
-        className="countdown-progress w-100"
+        className={`countdown-progress w-100 ${theme.bgSecondary}`}
+        color={theme.progress}
         animated
       />
     </>

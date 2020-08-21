@@ -1,7 +1,7 @@
 import React from "react";
 import { StopwatchElementProps, StopwatchLabelProps } from "./types";
 import { Container, Row, Col } from "reactstrap";
-import { TimeDate } from "../../common";
+import { TimeDate, ThemeContext } from "../../common";
 
 const StopwatchLabel = ({ hSize = 5, children }: StopwatchLabelProps) => (
   <Container
@@ -16,12 +16,14 @@ export const StopwatchElement = ({
   duration,
   totalDuration,
 }: StopwatchElementProps) => {
+  const theme = React.useContext(ThemeContext);
+
   let timeDate_md = 12;
   if (totalDuration) timeDate_md /= 2;
   if (lap) timeDate_md -= 1;
 
   return (
-    <Container fluid className={(lap ?? 0) % 2 === 1 ? "bg-light" : ""}>
+    <Container fluid className={(lap ?? 0) % 2 === 1 ? theme.bgSecondary : ""}>
       <Row>
         {lap ? (
           <Col xs="12" md="2">

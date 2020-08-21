@@ -13,6 +13,7 @@ import {
   Row,
   Button,
 } from "reactstrap";
+import { NavigationProps } from "./types";
 
 type NavbarItemProps = {
   to: string;
@@ -26,7 +27,7 @@ const NavbarItem = ({ to, children }: NavbarItemProps) => (
   </NavItem>
 );
 
-export const Navigation = () => {
+export const Navigation = ({ toggleTheme }: NavigationProps) => {
   const [navIsCollapsed, setNavCollapsed] = React.useState(true);
   const [peakIsCollapsed, setPeakCollapsed] = React.useState(true);
   const toggleNavbar = () => setNavCollapsed(!navIsCollapsed);
@@ -80,6 +81,9 @@ export const Navigation = () => {
             <NavbarText>0:00:00</NavbarText>
             <Button onClick={togglePeak} outline color="link">
               <span className="dropdown-toggle"></span>
+            </Button>
+            <Button onClick={toggleTheme} outline color="link">
+              <span>Theme</span>
             </Button>
           </Nav>
         </Collapse>

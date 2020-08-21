@@ -12,7 +12,7 @@ import {
   TimerInputProps,
   InputTimeChangeTypes,
 } from "./types";
-import { StringToNum, ClampNumber } from "../../common";
+import { StringToNum, ClampNumber, ThemeContext } from "../../common";
 import dayjs from "../../common/dayjs";
 
 const TimeInput = ({
@@ -22,23 +22,28 @@ const TimeInput = ({
   min,
   disabled = false,
   children,
-}: TimeInputParams) => (
-  <Col xs="12" md="4">
-    <InputGroup>
-      <InputGroupAddon addonType="prepend">
-        <InputGroupText>{children}</InputGroupText>
-      </InputGroupAddon>
-      <Input
-        type="number"
-        min={min}
-        max={max}
-        disabled={disabled}
-        value={value}
-        onChange={onValueChange}
-      ></Input>
-    </InputGroup>
-  </Col>
-);
+}: TimeInputParams) => {
+  const theme = React.useContext(ThemeContext);
+
+  return (
+    <Col xs="12" md="4">
+      <InputGroup>
+        <InputGroupAddon addonType="prepend" className={theme.bgSecondary}>
+          <InputGroupText>{children}</InputGroupText>
+        </InputGroupAddon>
+        <Input
+          type="number"
+          min={min}
+          max={max}
+          disabled={disabled}
+          value={value}
+          onChange={onValueChange}
+          className={`${theme.bgPrimary} ${theme.textPrimary}`}
+        ></Input>
+      </InputGroup>
+    </Col>
+  );
+};
 
 export const TimerInput = ({ onChange, disabled }: TimerInputProps) => {
   const [inputTime, setInputTime] = React.useState(dayjs.duration(0));
