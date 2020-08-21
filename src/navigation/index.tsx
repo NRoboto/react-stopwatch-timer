@@ -78,12 +78,12 @@ export const Navigation = ({ toggleTheme }: NavigationProps) => {
           </Nav>
           {/* Right content */}
           <Nav>
-            <NavbarText>0:00:00</NavbarText>
             <Button onClick={togglePeak} outline color="link">
+              <NavbarText>0:00:00</NavbarText>{" "}
               <span className="dropdown-toggle"></span>
             </Button>
             <Button onClick={toggleTheme} outline color="link">
-              <span>Theme</span>
+              <NavbarText>Theme</NavbarText>
             </Button>
           </Nav>
         </Collapse>
