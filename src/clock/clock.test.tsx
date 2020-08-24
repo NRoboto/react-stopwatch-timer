@@ -4,12 +4,17 @@ import { Clock } from "./";
 import MockDate from "mockdate";
 import { GetTestChildText } from "../common/test";
 
-describe("Clock", () => {
-  MockDate.set("2018-04-23T16:52:13.564");
-  const clockEle = Renderer.create(<Clock />);
+describe("Clock Element", () => {
+  let clockEle: Renderer.ReactTestRenderer;
+
+  beforeEach(() => {
+    MockDate.reset();
+    MockDate.set("2018-04-23T16:52:13.564");
+    clockEle = Renderer.create(<Clock />);
+  });
 
   it("renders without error", () => {
-    Renderer.create(<Clock />);
+    expect(clockEle).not.toBeUndefined();
   });
 
   it("renders correct time", () => {
