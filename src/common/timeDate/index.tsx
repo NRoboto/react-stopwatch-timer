@@ -35,7 +35,8 @@ const TimeDateRow = ({
 const durationDisplayUnits = ["h", "m", "s"] as const;
 const GetDurationString = (duration: Duration) => {
   let durationString: string = "";
-  durationString += duration.days() >= 1 ? `${duration.days()} days ` : "";
+  durationString +=
+    duration.asDays() >= 1 ? `${Math.floor(duration.asDays())} days ` : "";
 
   durationString += durationDisplayUnits
     .filter((unit) => duration.as(unit) >= 1)
