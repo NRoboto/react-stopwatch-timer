@@ -2,15 +2,7 @@ import React from "react";
 import Renderer from "react-test-renderer";
 import { Clock } from "./";
 import MockDate from "mockdate";
-
-const isString = (val: any): val is string =>
-  val.toString && val.toString() === val;
-
-const getChildText = (element: Renderer.ReactTestInstance) =>
-  element
-    .findAll((ele) => ele.children.some((child) => isString(child)))
-    .map((ele) => ele.children)
-    .join("");
+import { GetTestChildText } from "../common/test";
 
 describe("Clock", () => {
   MockDate.set("2018-04-23T16:52:13.564");
@@ -22,7 +14,7 @@ describe("Clock", () => {
 
   it("renders correct time", () => {
     const timeRow = clockEle.root.findByProps({ className: "time-output" });
-    const text = getChildText(timeRow);
+    const text = GetTestChildText(timeRow);
 
     expect(text).toMatch(/4|16/);
     expect(text).toMatch(/:52/);
@@ -34,7 +26,7 @@ describe("Clock", () => {
 
   it("renders correct date", () => {
     const dateRow = clockEle.root.findByProps({ className: "date-output" });
-    const text = getChildText(dateRow);
+    const text = GetTestChildText(dateRow);
 
     expect(text).toMatch(/Monday/);
     expect(text).toMatch(/23/);

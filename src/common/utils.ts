@@ -24,3 +24,6 @@ export const StringToNum = (str: string) => {
   if (isNaN(val)) throw new Error(`string "${str}" is not a number.`);
   return val;
 };
+
+export const IsString = (val: any): val is string =>
+  val.toString && val.toString() === val;
