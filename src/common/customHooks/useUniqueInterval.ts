@@ -1,9 +1,10 @@
 import React from "react";
 
-type SetInterval = (
+export type SetInterval = (
   handler?: TimerHandler,
   timeout?: number | undefined
 ) => void;
+
 export const useUniqueInterval = (): SetInterval => {
   const intervalID = React.useRef<undefined | number>();
 
