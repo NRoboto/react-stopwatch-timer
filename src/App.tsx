@@ -1,16 +1,16 @@
 import React from "react";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { RouteElement } from "./types";
-import { ThemeContext, ThemeLight, ThemeDark } from "./common";
+import { RouteElement } from "types";
+import { ThemeContext, ThemeLight, ThemeDark } from "common";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import "App.css";
 
-import { Navigation } from "./navigation";
-import { Clock } from "./clock";
-import { Stopwatch } from "./stopwatch";
-import { Timer } from "./timer";
+import { Navigation } from "navigation";
+import { Clock } from "clock";
+import { Stopwatch } from "stopwatch";
+import { Timer } from "timer";
 
 const routes: readonly RouteElement[] = [
   { path: "/stopwatch", Component: <Stopwatch /> },

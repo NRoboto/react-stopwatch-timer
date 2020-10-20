@@ -1,6 +1,6 @@
 import React from "react";
-import { TimeDate, ContentContainer } from "../common";
-import dayjs from "../common/dayjs";
+import { TimeDate, ContentContainer } from "common";
+import dayjs from "common/dayjs";
 
 export const Clock = () => {
   const [date, setDate] = React.useState(dayjs());

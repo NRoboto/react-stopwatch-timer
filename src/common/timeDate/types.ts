@@ -1,5 +1,5 @@
 import { ColumnProps } from "reactstrap/lib/Col";
-import dayjs, { Duration } from "../dayjs";
+import dayjs, { Duration } from "common/dayjs";
 
 type DisplaySize = 1 | 2 | 3 | 4 | 5 | 6;
 

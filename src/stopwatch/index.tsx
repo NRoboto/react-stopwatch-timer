@@ -4,11 +4,11 @@ import {
   ContentContainer,
   useStatePrev,
   useUniqueInterval,
-} from "../common";
+} from "common";
 import { Button, Col, Row } from "reactstrap";
 import { StopwatchElement } from "./stopwatchElement";
 import { TimerElementDatum } from "./types";
-import dayjs from "../common/dayjs";
+import dayjs from "common/dayjs";
 
 export const Stopwatch = () => {
   const [t1, t0, setT1, t0Ref] = useStatePrev(dayjs());

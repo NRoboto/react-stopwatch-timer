@@ -1,7 +1,7 @@
 import React from "react";
 import { Jumbotron, Container } from "reactstrap";
 import { ContentContainerProps } from "./types";
-import { ThemeContext } from "../";
+import { ThemeContext } from "common";
 
 import "./styles.css";
 

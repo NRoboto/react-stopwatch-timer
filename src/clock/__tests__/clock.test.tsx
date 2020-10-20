@@ -1,8 +1,8 @@
 import React from "react";
 import Renderer from "react-test-renderer";
-import { Clock } from "./";
+import { Clock } from "clock";
 import MockDate from "mockdate";
-import { GetTestChildText } from "../common/test";
+import { GetTestChildText } from "common/test";
 
 describe("Clock Element", () => {
   let clockEle: Renderer.ReactTestRenderer;

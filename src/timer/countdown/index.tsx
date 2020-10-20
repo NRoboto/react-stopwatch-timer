@@ -4,8 +4,8 @@ import {
   ThemeContext,
   useStatePrev,
   useUniqueInterval,
-} from "../../common";
-import dayjs from "../../common/dayjs";
+} from "common";
+import dayjs from "common/dayjs";
 import { Progress } from "reactstrap";
 import { CountdownProps } from "./types";
 

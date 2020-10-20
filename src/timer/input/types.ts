@@ -1,4 +1,4 @@
-import { Duration } from "../../common/dayjs";
+import { Duration } from "common/dayjs";
 
 export type InputTimeChangeTypes = "h" | "m" | "s";
 

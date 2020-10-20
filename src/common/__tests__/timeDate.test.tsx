@@ -1,9 +1,9 @@
 import React from "react";
 import Renderer from "react-test-renderer";
-import { TimeDate } from "./";
+import { TimeDate } from "common/timeDate";
 import MockDate from "mockdate";
-import { GetTestChildText } from "../test";
-import dayjs, { Duration } from "../dayjs";
+import { GetTestChildText } from "common/test";
+import dayjs, { Duration } from "common/dayjs";
 
 describe("Time Date Element", () => {
   const testTimeDate = "2018-04-23T16:52:13.564";

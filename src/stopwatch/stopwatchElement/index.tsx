@@ -1,7 +1,7 @@
 import React from "react";
 import { StopwatchElementProps, StopwatchLabelProps } from "./types";
 import { Container, Row, Col } from "reactstrap";
-import { TimeDate, ThemeContext } from "../../common";
+import { TimeDate, ThemeContext } from "common";
 
 const StopwatchLabel = ({ hSize = 5, children }: StopwatchLabelProps) => (
   <Container

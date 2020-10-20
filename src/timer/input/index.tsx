@@ -12,8 +12,8 @@ import {
   TimerInputProps,
   InputTimeChangeTypes,
 } from "./types";
-import { StringToNum, ClampNumber, ThemeContext } from "../../common";
-import dayjs from "../../common/dayjs";
+import { StringToNum, ClampNumber, ThemeContext } from "common";
+import dayjs from "common/dayjs";
 
 const TimeInput = ({
   value,

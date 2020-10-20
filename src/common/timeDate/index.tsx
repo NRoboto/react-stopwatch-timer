@@ -1,8 +1,8 @@
 import React from "react";
 import { TimeDateProps, TimeDateRowProps } from "./types";
 import { Container, Col, Row } from "reactstrap";
-import dayjs, { Duration } from "../dayjs";
-import { NumToFixedLengthString } from "../";
+import dayjs, { Duration } from "common/dayjs";
+import { NumToFixedLengthString } from "common";
 
 const ToFixedWidthElements = (input: string, width: string) => {
   return input.split("").map((char, i) => (

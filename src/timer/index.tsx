@@ -10,10 +10,10 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import dayjs, { Duration } from "../common/dayjs";
+import dayjs, { Duration } from "common/dayjs";
 import { TimerInput } from "./input";
 import { Countdown } from "./countdown";
-import { ContentContainer } from "../common";
+import { ContentContainer } from "common";
 import { TimerFinishedModalProps } from "./types";
 
 const TimerFinishedModal = ({ isOpen, close }: TimerFinishedModalProps) => (
