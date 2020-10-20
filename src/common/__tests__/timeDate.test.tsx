@@ -1,9 +1,8 @@
 import React from "react";
-import Renderer from "react-test-renderer";
+import { shallow } from "enzyme";
 import { TimeDate } from "common/timeDate";
 import MockDate from "mockdate";
-import { GetTestChildText } from "common/test";
-import dayjs, { Duration } from "common/dayjs";
+import dayjs from "common/dayjs";
 
 describe("Time Date Element", () => {
   const testTimeDate = "2018-04-23T16:52:13.564";
@@ -14,14 +13,14 @@ describe("Time Date Element", () => {
   });
 
   it("renders without error", () => {
-    expect(Renderer.create(<TimeDate />)).not.toBeUndefined();
+    expect(shallow(<TimeDate />)).not.toBeUndefined();
   });
 
   it("renders correct time", () => {
-    const timeDateEle = Renderer.create(
+    const wrapper = shallow(
       <TimeDate time={dayjs(testTimeDate)} timeFormat="hh:mm:ss:SSS a" />
     );
-    const text = GetTestChildText(timeDateEle.root);
+    const text = wrapper.render().text();
 
     expect(text).toMatch(/16|4/);
     expect(text).toMatch(/52/);
@@ -31,14 +30,14 @@ describe("Time Date Element", () => {
   });
 
   it("renders correct date", () => {
-    const timeDateEle = Renderer.create(
+    const wrapper = shallow(
       <TimeDate
         time={dayjs(testTimeDate)}
         timeFormat=""
         dateFormat="DD MMMM MM YYYY"
       />
     );
-    const text = GetTestChildText(timeDateEle.root);
+    const text = wrapper.render().text();
 
     expect(text).toMatch(/23/);
     expect(text).toMatch(/April/i);
@@ -47,15 +46,10 @@ describe("Time Date Element", () => {
   });
 
   it("renders duration correctly", () => {
-    const timeDateEle = Renderer.create(
-      <TimeDate time={dayjs.duration(testDuration)} />
-    );
-    const text = GetTestChildText(timeDateEle.root);
+    const wrapper = shallow(<TimeDate time={dayjs.duration(testDuration)} />);
+    const text = wrapper.render().text();
 
-    expect(() =>
-      timeDateEle.root.findByProps({ className: "time-output" })
-    ).not.toThrow();
-
+    expect(wrapper.find(".time-output").length).toBe(1);
     expect(text).toMatch(/428 days/i);
     expect(text).toMatch(/4/i);
     expect(text).toMatch(/05/);
@@ -63,28 +57,18 @@ describe("Time Date Element", () => {
   });
 
   it("doesn't render date for duration", () => {
-    const timeDateEle = Renderer.create(
-      <TimeDate time={dayjs.duration(testDuration)} />
-    );
-
-    expect(() =>
-      timeDateEle.root.findByProps({ className: "date-output" })
-    ).toThrow();
+    const wrapper = shallow(<TimeDate time={dayjs.duration(testDuration)} />);
+    expect(wrapper.find(".date-output").length).toBe(0);
   });
 
   it("renders current time by default", () => {
     MockDate.set("2020-08-24T15:16:05.189");
-    const timeDateEle = Renderer.create(<TimeDate />);
+    const wrapper = shallow(<TimeDate />);
 
-    expect(() =>
-      timeDateEle.root.findByProps({ className: "time-output" })
-    ).not.toThrow();
+    expect(wrapper.find(".time-output").length).toBe(1);
+    expect(wrapper.find(".date-output").length).toBe(0);
 
-    expect(() =>
-      timeDateEle.root.findByProps({ className: "date-output" })
-    ).toThrow();
-
-    const text = GetTestChildText(timeDateEle.root);
+    const text = wrapper.render().text();
 
     expect(text).toMatch(/15|3/);
     expect(text).toMatch(/16/);
@@ -93,34 +77,25 @@ describe("Time Date Element", () => {
   });
 
   it("doesn't render date when no date format is present", () => {
-    const timeDateEle = Renderer.create(<TimeDate dateFormat={undefined} />);
-
-    expect(() =>
-      timeDateEle.root.findByProps({ className: "date-output" })
-    ).toThrow();
+    const wrapper = shallow(<TimeDate dateFormat={undefined} />);
+    expect(wrapper.find(".date-output").length).toBe(0);
   });
 
   it("updates on time change", () => {
     let timeDate = dayjs(testTimeDate);
 
-    let timeDateEle = Renderer.create(
-      <TimeDate time={dayjs(timeDate)} timeFormat="hh:mm:ss a" />
-    );
+    let wrapper = shallow(<TimeDate time={timeDate} timeFormat="hh:mm:ss a" />);
 
-    Renderer.act(() => {
-      timeDate = timeDate.subtract(8, "hour");
-      timeDate = timeDate.add(3, "minute");
-      timeDate = timeDate.add(5, "second");
-      timeDateEle.update(
-        <TimeDate time={dayjs(timeDate)} timeFormat="hh:mm:ss a" />
-      );
-    });
+    const newTimeDate = timeDate
+      .subtract(8, "hour")
+      .add(3, "minute")
+      .add(5, "second");
+    wrapper.setProps({ time: newTimeDate });
 
-    const text = GetTestChildText(timeDateEle.root);
-
-    expect(text).toMatch(/8/);
-    expect(text).toMatch(/55/);
-    expect(text).toMatch(/18/);
+    const text = wrapper.render().text();
+    expect(text).toMatch(/8:/);
+    expect(text).toMatch(/:55/);
+    expect(text).toMatch(/:18/);
     expect(text).toMatch(/am/i);
   });
 });

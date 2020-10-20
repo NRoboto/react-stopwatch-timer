@@ -1,27 +1,25 @@
 import React from "react";
-import Renderer from "react-test-renderer";
+import { shallow, ShallowWrapper } from "enzyme";
 import { Clock } from "clock";
 import MockDate from "mockdate";
-import { GetTestChildText } from "common/test";
 
 describe("Clock Element", () => {
-  let clockEle: Renderer.ReactTestRenderer;
+  let wrapper: ShallowWrapper;
 
   beforeEach(() => {
     MockDate.reset();
     MockDate.set("2018-04-23T16:52:13.564");
-    clockEle = Renderer.create(<Clock />);
+    wrapper = shallow(<Clock />);
   });
 
   it("renders without error", () => {
-    expect(clockEle).not.toBeUndefined();
+    expect(wrapper).not.toBeUndefined();
   });
 
   it("renders correct time", () => {
-    const timeRow = clockEle.root.findByProps({ className: "time-output" });
-    const text = GetTestChildText(timeRow);
+    const text = wrapper.render().text();
 
-    expect(text).toMatch(/4|16/);
+    expect(text).toMatch(/(4|16):/);
     expect(text).toMatch(/:52/);
     expect(text).toMatch(/:13/);
     expect(text).not.toMatch(/\.564/);
@@ -30,8 +28,7 @@ describe("Clock Element", () => {
   });
 
   it("renders correct date", () => {
-    const dateRow = clockEle.root.findByProps({ className: "date-output" });
-    const text = GetTestChildText(dateRow);
+    const text = wrapper.render().text();
 
     expect(text).toMatch(/Monday/);
     expect(text).toMatch(/23/);
