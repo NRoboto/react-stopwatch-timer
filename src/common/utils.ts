@@ -1,7 +1,7 @@
 export const NumToFixedLengthString = (
   num: number,
   length: number,
-  prefix?: true
+  prefix: boolean = true
 ) => {
   const numStr = num.toString();
   if (length < numStr.length) return numStr.slice(0, length);
