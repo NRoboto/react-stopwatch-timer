@@ -1,5 +1,9 @@
 export { TimeDate } from "./timeDate";
-export { useStatePrev, useUniqueInterval } from "./customHooks";
+export {
+  useStatePrev,
+  useUniqueInterval,
+  useSemiPermanentState,
+} from "./customHooks";
 export {
   NumToFixedLengthString,
   ClampNumber,

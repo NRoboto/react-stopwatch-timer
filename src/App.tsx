@@ -2,7 +2,12 @@ import React from "react";
 import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { RouteElement } from "types";
-import { ThemeContext, ThemeLight, ThemeDark } from "common";
+import {
+  ThemeContext,
+  ThemeLight,
+  ThemeDark,
+  useSemiPermanentState,
+} from "common";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "App.css";
@@ -26,9 +31,9 @@ const getSlideDirection = (path: string, prevPath: string) =>
 function App() {
   const location = useLocation();
   const prevLocation = React.useRef(location);
-  const [theme, setTheme] = React.useState<
+  const [theme, setTheme] = useSemiPermanentState<
     typeof ThemeLight | typeof ThemeDark
-  >(ThemeDark);
+  >("theme", ThemeDark);
 
   const toggleTheme = () => {
     setTheme(theme === ThemeLight ? ThemeDark : ThemeLight);
