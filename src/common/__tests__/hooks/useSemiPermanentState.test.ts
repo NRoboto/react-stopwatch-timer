@@ -1,5 +1,6 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook, act, RenderResult } from "@testing-library/react-hooks";
 import { useSemiPermanentState } from "common/customHooks";
+import { Dispatch, SetStateAction } from "react";
 
 const key1 = "test",
   key2 = "test2";
@@ -7,20 +8,14 @@ const initState = { propA: "test value" },
   newState = { propA: "new value" };
 const newStateJSON = JSON.stringify(newState);
 
-const resetLocalStorageMocks = () => {
-  (localStorage.clear as jest.Mock).mockClear();
-  (localStorage.getItem as jest.Mock).mockClear();
-  (localStorage.key as jest.Mock).mockClear();
-  (localStorage.removeItem as jest.Mock).mockClear();
-  (localStorage.setItem as jest.Mock).mockClear();
-};
+const setItemSpy = jest.spyOn(Storage.prototype, "setItem");
 
-let result: any;
+let result: RenderResult<
+  [typeof initState, Dispatch<SetStateAction<typeof initState>>]
+>;
 beforeEach(() => {
   localStorage.clear();
   result = renderHook(() => useSemiPermanentState(key1, initState)).result;
-
-  resetLocalStorageMocks();
 });
 
 it("Uses default state if no key is present in localStorage", () => {
@@ -41,15 +36,14 @@ it("Handles state updates correctly", () => {
 
 it("Correctly saves state change to localStorage using JSON", () => {
   const [, setState] = result.current;
-  resetLocalStorageMocks();
 
   act(() => {
     setState(newState);
   });
 
-  expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-  expect(localStorage.setItem).toHaveBeenCalledWith(key1, newStateJSON);
-  expect(localStorage.__STORE__[key1]).toBe(newStateJSON);
+  expect(setItemSpy).toHaveBeenCalledTimes(2);
+  expect(setItemSpy).toHaveBeenCalledWith(key1, newStateJSON);
+  expect(localStorage[key1]).toBe(newStateJSON);
   expect(localStorage.length).toBe(1);
 });
 
