@@ -47,7 +47,7 @@ it("Correctly saves state change to localStorage using JSON", () => {
   expect(localStorage.length).toBe(1);
 });
 
-it("Gets state from localStorage", () => {
+it("Retreives state from localStorage when key already exists", () => {
   localStorage.setItem(key2, newStateJSON);
 
   const { current } = renderHook(() => useSemiPermanentState(key2, {})).result;
