@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import {
   Navbar,
   NavItem,
-  NavbarBrand,
   NavbarToggler,
   Collapse,
   Nav,
@@ -80,7 +79,7 @@ const NavMainBar = ({
   toggleTheme,
 }: NavMainBarProps) => (
   <Navbar color="primary" dark expand="md" sticky="top" className="shadow-sm">
-    <NavbarBrand href="#">Stopwatch/Timer App</NavbarBrand>
+    <NavLink className="navbar-brand" to="/" exact>Stopwatch/Timer App</NavLink>
     <NavbarToggler onClick={toggleCollapse} className="mr-2"></NavbarToggler>
     <Collapse isOpen={!collapsed} navbar>
       <NavMainBarLeft />
