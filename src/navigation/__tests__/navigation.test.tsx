@@ -1,12 +1,17 @@
-import { shallow, ShallowWrapper } from "enzyme";
-import { MemoryRouter } from "react-router-dom";
+import { mount, ReactWrapper } from "enzyme";
+import { MemoryRouter, NavLink } from "react-router-dom";
+import { NavbarBrand } from "reactstrap/lib";
 import { Navigation } from "..";
 
-let wrapper: ShallowWrapper;
+let wrapper: ReactWrapper;
 const toggleThemeMock = jest.fn();
 
 beforeEach(() => {
-    wrapper = shallow(<MemoryRouter><Navigation toggleTheme={toggleThemeMock}/></MemoryRouter>)
+    wrapper = mount(<MemoryRouter><Navigation toggleTheme={toggleThemeMock}/></MemoryRouter>)
+});
+
+afterEach(() => {
+    wrapper.unmount();
 });
 
 it("renders without error", () => {
@@ -14,8 +19,18 @@ it("renders without error", () => {
 });
 
 describe("navigation", () => {
-    it.todo("brand navigates to root");
-    it.todo("links render and navigate to correct pages");
+    it("brand navigates to root", () => {
+        expect(wrapper.find(NavbarBrand).every("[href='/']")).toBe(true);
+    });
+
+    it("links render and navigate to correct pages", () => {
+        const navItems = wrapper.find(NavLink);
+        expect(navItems.length).toBeGreaterThanOrEqual(3);
+
+        expect(navItems.exists("[href='/stopwatch']")).toBe(true);
+        expect(navItems.exists("[href='/timer']")).toBe(true);
+        expect(navItems.exists("[href='/clock']")).toBe(true);
+    });
 });
 
 describe("peak", () => {
