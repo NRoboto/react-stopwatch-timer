@@ -1,9 +1,12 @@
+import { MouseEventHandler } from "react";
+
 export type NavigationProps = {
   toggleTheme: () => void;
 };
 
 export type NavbarItemProps = {
-  to: string;
+  to?: string;
+  onClick?: MouseEventHandler;
   children: any;
 };
 
@@ -21,4 +24,8 @@ export type NavMainBarProps = {
 export type NavMainBarRightProps = {
   togglePeak: () => void;
   toggleTheme: () => void;
+};
+
+export type PeakPreviewParams = {
+  togglePeak: () => void;
 };
