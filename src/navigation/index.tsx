@@ -1,20 +1,24 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {
-  Navbar,
-  NavbarToggler,
-  Collapse,
-  Nav,
-  NavbarText,
-  Button,
-} from "reactstrap";
+import { Navbar, NavbarToggler, Collapse, Nav } from "reactstrap";
 import { NavbarItem } from "./item";
 import { Peak, PeakPreview } from "./peak";
 import {
   NavigationProps,
   NavMainBarProps,
   NavMainBarRightProps,
+  ThemeTogglerProps,
 } from "./types";
+
+export const ThemeToggler = ({ toggleTheme }: ThemeTogglerProps) => (
+  <NavbarItem onClick={toggleTheme}>Theme</NavbarItem>
+);
+
+const NavigationBrand = () => (
+  <NavLink className="navbar-brand" to="/" exact>
+    Stopwatch/Timer App
+  </NavLink>
+);
 
 const NavMainBarLeft = () => (
   <Nav className="mr-auto" navbar>
@@ -27,7 +31,7 @@ const NavMainBarLeft = () => (
 const NavMainBarRight = ({ togglePeak, toggleTheme }: NavMainBarRightProps) => (
   <Nav navbar>
     <PeakPreview togglePeak={togglePeak} />
-    <NavbarItem onClick={toggleTheme}>Theme</NavbarItem>
+    <ThemeToggler toggleTheme={toggleTheme} />
   </Nav>
 );
 
@@ -38,9 +42,8 @@ const NavMainBar = ({
   toggleTheme,
 }: NavMainBarProps) => (
   <Navbar color="primary" dark expand="md" sticky="top" className="shadow-sm">
-    <NavLink className="navbar-brand" to="/" exact>
-      Stopwatch/Timer App
-    </NavLink>
+    <NavigationBrand />
+
     <NavbarToggler onClick={toggleCollapse} className="mr-2"></NavbarToggler>
     <Collapse isOpen={!collapsed} navbar>
       <NavMainBarLeft />

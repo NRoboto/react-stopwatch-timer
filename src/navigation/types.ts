@@ -29,3 +29,7 @@ export type NavMainBarRightProps = {
 export type PeakPreviewParams = {
   togglePeak: () => void;
 };
+
+export type ThemeTogglerProps = {
+  toggleTheme: () => void;
+};
