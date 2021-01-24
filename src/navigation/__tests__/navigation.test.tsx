@@ -33,9 +33,10 @@ describe("navigation", () => {
     const navItems = wrapper.find(NavLink);
     expect(navItems.length).toBeGreaterThanOrEqual(3);
 
-    expect(navItems.exists("[href='/stopwatch']")).toBe(true);
-    expect(navItems.exists("[href='/timer']")).toBe(true);
-    expect(navItems.exists("[href='/clock']")).toBe(true);
+    const navItemsCherio = navItems.map((n) => n.render());
+    expect(navItemsCherio.some((n) => n.is("[href='/stopwatch']"))).toBe(true);
+    expect(navItemsCherio.some((n) => n.is("[href='/timer']"))).toBe(true);
+    expect(navItemsCherio.some((n) => n.is("[href='/clock']"))).toBe(true);
   });
 });
 
