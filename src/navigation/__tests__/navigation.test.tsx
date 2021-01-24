@@ -49,8 +49,7 @@ describe("peak", () => {
   it("peak is initially collapsed", () => {
     const peakCollapse = wrapper.find(Peak).find(Collapse);
 
-    expect(peakCollapse.exists(".collapse")).toBe(true);
-    expect(peakCollapse.exists(".show")).toBe(false);
+    expect(peakCollapse.prop("isOpen")).toBe(false);
     expect(peakCollapse.prop("aria-hidden")).toBe(true);
   });
 
@@ -58,18 +57,21 @@ describe("peak", () => {
     act(() => wrapper.find(PeakPreview).childAt(0).props().onClick());
     wrapper.update();
 
-    expect(wrapper.find(Peak).find(Collapse).prop("isOpen")).toBe(true);
-    expect(wrapper.find(Peak).find(Collapse).prop("aria-hidden")).toBe(false);
+    const peakCollapse = wrapper.find(Peak).find(Collapse);
+    expect(peakCollapse.prop("isOpen")).toBe(true);
+    expect(peakCollapse.prop("aria-hidden")).toBe(false);
   });
 
   it("clicking peak preview while expanded collapses peak", async () => {
+    // NOTE: Can't save element in variable (probably due to element being replaced on update)
     act(() => wrapper.find(PeakPreview).childAt(0).props().onClick());
     wrapper.update();
     act(() => wrapper.find(PeakPreview).childAt(0).props().onClick());
     wrapper.update();
 
-    expect(wrapper.find(Peak).find(Collapse).prop("isOpen")).toBe(false);
-    expect(wrapper.find(Peak).find(Collapse).prop("aria-hidden")).toBe(true);
+    const peakCollapse = wrapper.find(Peak).find(Collapse);
+    expect(peakCollapse.prop("isOpen")).toBe(false);
+    expect(peakCollapse.prop("aria-hidden")).toBe(true);
   });
 });
 
