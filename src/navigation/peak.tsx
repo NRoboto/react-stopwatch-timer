@@ -3,7 +3,7 @@ import { NavbarItem } from "./item";
 import { NavPeakProps, PeakPreviewParams } from "./types";
 
 export const Peak = ({ collapsed }: NavPeakProps) => (
-  <Collapse isOpen={!collapsed}>
+  <Collapse isOpen={!collapsed} aria-hidden={collapsed}>
     <Container className="bg-primary text-light" fluid>
       <Row>
         <Col xs="12" md="2">
