@@ -3,7 +3,7 @@ import { act } from "react-dom/test-utils";
 import { MemoryRouter, NavLink } from "react-router-dom";
 import { Collapse, NavbarBrand } from "reactstrap/lib";
 import { Peak, PeakPreview } from "navigation/peak";
-import { Navigation } from "navigation";
+import { Navigation, ThemeToggler } from "navigation";
 
 let wrapper: ReactWrapper;
 const toggleThemeMock = jest.fn();
@@ -83,5 +83,17 @@ describe("collapse", () => {
 });
 
 describe("theme", () => {
-  it.todo("clicking theme button calls toggle theme");
+  it("one theme button renders without error", () => {
+    const themeToggler = wrapper.find(ThemeToggler);
+    expect(themeToggler.length).toBe(1);
+  });
+
+  it("clicking theme button calls toggle theme", () => {
+    toggleThemeMock.mockClear();
+
+    const themeButton = wrapper.find(ThemeToggler).childAt(0);
+    act(() => themeButton.props().onClick());
+
+    expect(toggleThemeMock).toHaveBeenCalledTimes(1);
+  });
 });
