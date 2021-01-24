@@ -41,7 +41,7 @@ describe("navigation", () => {
 });
 
 describe("peak", () => {
-  it("peak and preview render without error", () => {
+  it("one peak and one peak preview render without error", () => {
     expect(wrapper.find(Peak).length).toBe(1);
     expect(wrapper.find(PeakPreview).length).toBe(1);
   });
