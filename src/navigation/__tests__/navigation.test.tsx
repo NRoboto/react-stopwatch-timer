@@ -1,7 +1,7 @@
 import { mount, ReactWrapper } from "enzyme";
 import { act } from "react-dom/test-utils";
 import { MemoryRouter, NavLink } from "react-router-dom";
-import { Collapse, NavbarBrand } from "reactstrap/lib";
+import { Collapse, NavbarBrand, NavbarToggler } from "reactstrap/lib";
 import { Peak, PeakPreview } from "navigation/peak";
 import { Navigation, ThemeToggler } from "navigation";
 
@@ -76,10 +76,43 @@ describe("peak", () => {
 });
 
 describe("collapse", () => {
-  it.todo("navbar collapses on small screen width");
-  it.todo("clicking collapse button expands navbar");
-  it.todo("clicking collapse button while expanded collapses navbar");
-  it.todo("links render in collapsed navbar");
+  it("navbar is initially collapsed", () => {
+    expect(
+      wrapper
+        .find(Collapse)
+        .filterWhere((n) => !!n.prop("navbar"))
+        .props().isOpen
+    ).toBe(false);
+  });
+
+  it("clicking collapse button expands navbar", () => {
+    // @ts-expect-error onClick doesn't require an event, but is typed to
+    act(() => wrapper.find(NavbarToggler).props().onClick?.());
+    wrapper.update();
+
+    expect(
+      wrapper
+        .find(Collapse)
+        .filterWhere((n) => !!n.prop("navbar"))
+        .props().isOpen
+    ).toBe(true);
+  });
+
+  it("clicking collapse button while expanded collapses navbar", () => {
+    // @ts-expect-error onClick doesn't require an event, but is typed to
+    act(() => wrapper.find(NavbarToggler).props().onClick?.());
+    wrapper.update();
+    // @ts-expect-error onClick doesn't require an event, but is typed to
+    act(() => wrapper.find(NavbarToggler).props().onClick?.());
+    wrapper.update();
+
+    expect(
+      wrapper
+        .find(Collapse)
+        .filterWhere((n) => !!n.prop("navbar"))
+        .props().isOpen
+    ).toBe(false);
+  });
 });
 
 describe("theme", () => {
