@@ -122,8 +122,6 @@ describe("theme", () => {
   });
 
   it("clicking theme button calls toggle theme", () => {
-    toggleThemeMock.mockClear();
-
     const themeButton = wrapper.find(ThemeToggler).childAt(0);
     act(() => themeButton.props().onClick());
 
