@@ -33,7 +33,12 @@ function App() {
   const prevLocation = React.useRef(location);
   const [theme, setTheme] = useSemiPermanentState<
     typeof ThemeLight | typeof ThemeDark
-  >("theme", ThemeDark);
+  >(
+    "theme",
+    window.matchMedia?.("(prefers-color-scheme: dark)").matches
+      ? ThemeDark
+      : ThemeLight
+  );
 
   const toggleTheme = () => {
     setTheme(theme === ThemeLight ? ThemeDark : ThemeLight);
